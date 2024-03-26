@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="456.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.samurayrus.customconverterui.CustomConverterUiController">
+   <children>
+      <Pane layoutX="14.0" layoutY="26.0" prefHeight="357.0" prefWidth="421.0">
+         <children>
+            <ListView fx:id="convertFromList" layoutX="13.0" layoutY="14.0" prefHeight="272.0" prefWidth="174.0" />
+            <ListView fx:id="convertToList" layoutX="247.0" layoutY="14.0" prefHeight="272.0" prefWidth="174.0" />
+            <Label layoutX="203.0" layoutY="115.0" prefHeight="26.0" prefWidth="43.0" text="=&gt;">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="welcomeText" layoutX="13.0" layoutY="285.0" prefHeight="23.0" prefWidth="423.0" />
+         </children>
+      </Pane>
+      <Button fx:id="convertButton" layoutX="182.0" layoutY="395.0" onAction="#onHelloButtonClick" prefHeight="46.0" prefWidth="75.0" text="Convert" />
+      <MenuBar layoutY="2.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
