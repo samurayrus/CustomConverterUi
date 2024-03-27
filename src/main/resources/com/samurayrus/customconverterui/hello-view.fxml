@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -16,15 +17,15 @@
          <children>
             <ListView fx:id="convertFromList" layoutX="13.0" layoutY="14.0" prefHeight="272.0" prefWidth="174.0" />
             <ListView fx:id="convertToList" layoutX="247.0" layoutY="14.0" prefHeight="272.0" prefWidth="174.0" />
+            <TextArea fx:id="infoTextArea" editable="false" layoutX="13.0" layoutY="293.0" pickOnBounds="false" prefHeight="65.0" prefWidth="408.0" text="Info: " wrapText="true" />
             <Label layoutX="203.0" layoutY="115.0" prefHeight="26.0" prefWidth="43.0" text="=&gt;">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="welcomeText" layoutX="13.0" layoutY="285.0" prefHeight="23.0" prefWidth="423.0" />
          </children>
       </Pane>
-      <Button fx:id="convertButton" layoutX="182.0" layoutY="395.0" onAction="#onHelloButtonClick" prefHeight="46.0" prefWidth="75.0" text="Convert" />
+      <Button fx:id="convertButton" layoutX="182.0" layoutY="395.0" onAction="#onHelloButtonClick" onDragDropped="#onDragDropped" onDragOver="#onDragOver" prefHeight="46.0" prefWidth="75.0" text="Convert" />
       <MenuBar layoutY="2.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
@@ -34,7 +35,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem onAction="#onAboutButtonClick" mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>

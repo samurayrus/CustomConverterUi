@@ -11,7 +11,7 @@ public class CustomConverterUiApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CustomConverterUiApp.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 456, 452);
         stage.setTitle("CustomConverterUi");
         stage.setScene(scene);
         stage.show();
