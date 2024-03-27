@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
-public class CustomConverterUiController extends Parent {
+public class CustomConverterUiController {
     @FXML
     public Button convertButton;
 
@@ -133,11 +133,6 @@ public class CustomConverterUiController extends Parent {
             infoTextArea.setText("Error! Wrong choice");
         }
 
-    }
-
-    @Override
-    public Node getStyleableNode() {
-        return super.getStyleableNode();
     }
 
     @FXML
