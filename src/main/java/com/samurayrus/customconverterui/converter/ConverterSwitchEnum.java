@@ -1,4 +1,4 @@
-package com.samurayrus.customconverterui;
+package com.samurayrus.customconverterui.converter;
 
 public enum ConverterSwitchEnum {
     JSON("CSV"), CSV("JSON"), TEST("TEST");

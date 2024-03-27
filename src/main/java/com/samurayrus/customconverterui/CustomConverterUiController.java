@@ -1,11 +1,11 @@
 package com.samurayrus.customconverterui;
 
+import com.samurayrus.customconverterui.converter.ConverterService;
+import com.samurayrus.customconverterui.converter.ConverterSwitchEnum;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -60,8 +60,8 @@ public class CustomConverterUiController {
         convertFromList.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
                 String selectedText = convertFromList.getSelectionModel().getSelectedItem();
-                if (selectedText.equals("json")) {
-                    //
+                if (selectedText.equals("JSON")) {
+                    //TODO: Здесь будут скрываться или раскрываться элементы в противоположном списке, чтобы пользователь понимал во что он может конвертировать
                 }
             }
         });
@@ -69,8 +69,8 @@ public class CustomConverterUiController {
         convertToList.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
                 String selectedText = convertToList.getSelectionModel().getSelectedItem();
-                if (selectedText.equals("csv")) {
-                    //
+                if (selectedText.equals("CSV")) {
+                    //TODO: Здесь будут скрываться или раскрываться элементы в противоположном списке, чтобы пользователь понимал во что он может конвертировать
                 }
             }
         });
@@ -79,15 +79,8 @@ public class CustomConverterUiController {
     @FXML
     public void onDragDropped(DragEvent dragEvent) throws IOException {
         if (dragEvent.getDragboard().hasFiles()) {
-            System.out.println("UPLOAD");
             setFilePathForConvert(dragEvent.getDragboard().getFiles().get(0).getPath());
-            System.out.println(filePathForConvert);
             infoTextArea.setText("Set File: \n" + filePathForConvert);
-//            ColorInput colorInput = new ColorInput();
-//            colorInput.setPaint(Color.GRAY);
-//            convertButton.setEffect(colorInput);
-//            contactService.uploadFileFromDisc(,
-//                    FilenameUtils.getExtension(dragEvent.getDragboard().getFiles().get(0).getPath()));
         }
     }
 
@@ -124,7 +117,7 @@ public class CustomConverterUiController {
 
             try {
                 String newFileName = convertFromString + "_" + convertToString + "_" + LocalDateTime.now().getNano() + "." + convertToString.toLowerCase(Locale.ROOT);
-                converterService.convert(filePathForConvert, newFileName);
+                converterService.convertFromJsonToCSV(filePathForConvert, newFileName);
                 infoTextArea.setText("Converted! New file has been created in the CustomConverterUi directory: " + newFileName);
             } catch (Exception e) {
                 infoTextArea.setText("Error with convert this file : \n" + e.getMessage());
