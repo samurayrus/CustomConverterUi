@@ -1,17 +1,17 @@
 package com.samurayrus.customconverterui.converter;
 
-import java.io.File;
-import java.io.IOException;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ConverterService {
 
 
-    public void convertFromJsonToCSV(String fromPath, String toPath) throws IOException {
+    public void convertFromJsonToCSV(String fromPath, String toPath, boolean customSeparator) throws IOException {
         JsonNode jsonTree = new ObjectMapper().readTree(new File(fromPath));
 
         CsvSchema.Builder csvSchemaBuilder = CsvSchema.builder();
@@ -19,7 +19,16 @@ public class ConverterService {
         JsonNode firstObject = jsonTree.elements().next();
 
         firstObject.fieldNames().forEachRemaining(csvSchemaBuilder::addColumn);
-        CsvSchema csvSchema = csvSchemaBuilder.build().withHeader();
+
+        char charSeparetor;
+        if (customSeparator)
+            charSeparetor = ';';
+        else
+            charSeparetor = ',';
+
+        CsvSchema csvSchema = csvSchemaBuilder.build()
+                .withColumnSeparator(charSeparetor)
+                .withHeader();
 
         //Преобразуем Json в csv файл с использованием ранее заданных заголовков
         CsvMapper csvMapper = new CsvMapper();

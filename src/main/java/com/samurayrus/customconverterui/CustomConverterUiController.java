@@ -50,11 +50,12 @@ public class CustomConverterUiController {
         convertToList.setItems(convertToCellContent);
         //----
         //FROM
-        convertFromCellContent.add("JSON");
-        convertFromCellContent.add("TEST");
+        convertFromCellContent.add(ConverterSwitchEnum.JSON.name());
+        convertFromCellContent.add(ConverterSwitchEnum.TEST.name());
         //TO
-        convertToCellContent.add("CSV");
-        convertToCellContent.add("TEST");
+        convertToCellContent.add(ConverterSwitchEnum.CSV.name());
+        convertToCellContent.add(ConverterSwitchEnum.CSV_EXCEL.name());
+        convertToCellContent.add(ConverterSwitchEnum.TEST.name());
         //----
 
         convertFromList.setOnMouseClicked(event -> {
@@ -109,15 +110,18 @@ public class CustomConverterUiController {
         ConverterSwitchEnum convertFrom = ConverterSwitchEnum.valueOf(convertFromString);
         ConverterSwitchEnum convertTo = ConverterSwitchEnum.valueOf(convertToString);
 
-        if (convertFrom.getConvertTo().equals(convertTo)) {
+        if (convertFrom.canConvertTo(convertTo)) {
             if (convertFrom == ConverterSwitchEnum.TEST) {
                 infoTextArea.setText("TEST=>TEST! Test complete!");
                 return;
             }
 
             try {
-                String newFileName = convertFromString + "_" + convertToString + "_" + LocalDateTime.now().getNano() + "." + convertToString.toLowerCase(Locale.ROOT);
-                converterService.convertFromJsonToCSV(filePathForConvert, newFileName);
+                String newFileName = convertFromString + "_" + convertToString + "_" + LocalDateTime.now().getNano() + "." + convertTo.getExtension();
+                if (convertTo == ConverterSwitchEnum.CSV_EXCEL)
+                    converterService.convertFromJsonToCSV(filePathForConvert, newFileName, true);
+                else
+                    converterService.convertFromJsonToCSV(filePathForConvert, newFileName, false);
                 infoTextArea.setText("Converted! New file has been created in the CustomConverterUi directory: " + newFileName);
             } catch (Exception e) {
                 infoTextArea.setText("Error with convert this file : \n" + e.getMessage());
