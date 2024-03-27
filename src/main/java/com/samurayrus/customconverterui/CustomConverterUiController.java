@@ -2,22 +2,30 @@ package com.samurayrus.customconverterui;
 
 import com.samurayrus.customconverterui.converter.ConverterService;
 import com.samurayrus.customconverterui.converter.ConverterSwitchEnum;
+import com.samurayrus.customconverterui.updater.UpdaterUiController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
 public class CustomConverterUiController {
+
+    @FXML
+    AnchorPane anchorPaneUi;
     @FXML
     public Button convertButton;
 
@@ -45,7 +53,7 @@ public class CustomConverterUiController {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         convertFromList.setItems(convertFromCellContent);
         convertToList.setItems(convertToCellContent);
         //----
@@ -74,6 +82,13 @@ public class CustomConverterUiController {
                 }
             }
         });
+
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("updater-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 435, 317);
+        stage.setTitle("Updater");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -131,7 +146,11 @@ public class CustomConverterUiController {
     @FXML
     public void onAboutButtonClick(ActionEvent actionEvent) {
         infoTextArea.setText(
-                "Привет! Это приложение находится на стадии разработки. Пока поддерживается конвертирование только из JSON в CSV по просьбам трудящихся. В будущем будет добавлена функция автообновления. SamurayRus"
+                "Привет! Это приложение находится на стадии разработки." +
+                        " Пока поддерживается конвертирование только из JSON в CSV по просьбам трудящихся." +
+                        " В будущем будет добавлена функция автообновления. " +
+                        "SamurayRus" +
+                        "GitHub for updates: https://github.com/samurayrus/CustomConverterUi"
         );
     }
 }
