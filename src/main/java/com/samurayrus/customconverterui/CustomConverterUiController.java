@@ -124,6 +124,7 @@ public class CustomConverterUiController {
                     converterService.convertFromJsonToCSV(filePathForConvert, newFileName, false);
                 infoTextArea.setText("Converted! New file has been created in the CustomConverterUi directory: " + newFileName);
             } catch (Exception e) {
+                e.printStackTrace();
                 infoTextArea.setText("Error with convert this file : \n" + e.getMessage());
             }
         } else {
